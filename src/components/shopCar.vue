@@ -12,8 +12,8 @@
         <div class="right-info">
           <div class="title">{{ item.title }}</div>
           <div class="info">
-            <div class="price">{{ handleNum(item.price) }}</div>
-            <div class="sale-num">{{ handleNum(item.sale) }}</div>
+            <div class="price">￥{{ handleNum(item.price) }}</div>
+            <div class="sale-num">已售{{ handleNum(item.sale) }}</div>
           </div>
         </div>
       </div>
@@ -37,11 +37,7 @@ export default {
       this.$store.commit("deleteItem", index);
     },
     handleSort(type, isUpSort) {
-      let sortRule = (a, b) => b[type] - a[type];
-      if (isUpSort) {
-        sortRule = (a, b) => a[type] - b[type];
-      }
-      this.itemList.sort(sortRule);
+      this.$store.commit("sortItemList", { type, isUpSort });
     },
   },
   computed: {
