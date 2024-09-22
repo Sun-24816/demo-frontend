@@ -2,6 +2,10 @@
   <div class="main">
     <div v-if="!itemList.length">购物车为空！</div>
     <div v-else class="shopCar">
+      <button @click="handleSort('price', true)">价格升序</button>
+      <button @click="handleSort('price', false)">价格降序</button>
+      <button @click="handleSort('sale', true)">销量升序</button>
+      <button @click="handleSort('sale', false)">销量降序</button>
       <div class="item" v-for="(item, index) in itemList" :key="item.name">
         <div class="delete" @click="handleDeleteItem(index)">删除</div>
         <div class="bg-image"></div>
@@ -31,6 +35,13 @@ export default {
   methods: {
     handleDeleteItem: function (index) {
       this.$store.commit("deleteItem", index);
+    },
+    handleSort(type, isUpSort) {
+      let sortRule = (a, b) => b[type] - a[type];
+      if (isUpSort) {
+        sortRule = (a, b) => a[type] - b[type];
+      }
+      this.itemList.sort(sortRule);
     },
   },
   computed: {
