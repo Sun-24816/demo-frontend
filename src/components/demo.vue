@@ -2,7 +2,9 @@
   <div class="demo">{{ name }}</div>
   <button @click="handleClick">按钮</button>
   <div v-if="isShow">车</div>
+
   <div v-else>购物车互斥的元素</div>
+  <div>我好帅</div>
   {{ handlePrice(15) }}
   {{ handlePrice(price) }}
   <div v-for="(item, index) in arr" :key="index">
